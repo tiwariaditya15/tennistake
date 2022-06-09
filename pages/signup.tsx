@@ -73,7 +73,7 @@ const SignUp: NextPage = () => {
           </p>
         </section>
         <button
-          className={`mt-4 rounded-md bg-slate-700 hover:bg-slate-900 p-2 text-white min-w-0`}
+          className={`mt-4 rounded-md bg-slate-900 hover:bg-slate-700 p-2 text-white min-w-0`}
           onClick={() => {
             if (signUpMutation.isLoading) {
               return;
