@@ -53,9 +53,9 @@ export default function Editor({}: EditorProps) {
     autofocus: false,
     onUpdate: (props) => {},
   });
-
+  console.log({ note });
   return (
-    <section className="p-4 bg-slate-50 h-screen overflow-scroll">
+    <section className="p-4 bg-slate-100 text-slate-700 text-lg h-screen overflow-scroll">
       <EditorContent editor={editor} className="h-screen" />
     </section>
   );
