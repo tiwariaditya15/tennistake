@@ -1,9 +1,9 @@
 export function debounce(callback: () => void, wait: number = 3000) {
   let timeoutId: NodeJS.Timer;
-  return () => {
+  return (...args: any[]) => {
     window.clearTimeout(timeoutId);
     timeoutId = setInterval(() => {
-      callback();
+      callback.apply(null, []);
     }, wait);
   };
 }

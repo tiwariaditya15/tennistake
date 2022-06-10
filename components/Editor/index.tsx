@@ -14,8 +14,7 @@ import Placeholder from "@tiptap/extension-placeholder";
 import { useNotesStore } from "../../store";
 import { useRouter } from "next/router";
 import { useSaveMutation } from "../../hooks";
-import { debounce } from "../../utils";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 interface EditorProps {
   noteId?: string;
@@ -23,12 +22,14 @@ interface EditorProps {
 }
 
 export default function Editor({}: EditorProps) {
+  const firstRender = useRef(true);
   const router = useRouter();
   const { noteId } = router["query"];
   const note = useNotesStore((state) =>
     state.notes.find((note) => note.id === noteId)
   );
   const saveMutation = useSaveMutation();
+
   const editor = useEditor(
     {
       extensions: [
@@ -60,10 +61,13 @@ export default function Editor({}: EditorProps) {
     },
     [note]
   );
-
   // debounced save calls
   const editorContent = editor?.getHTML();
   useEffect(() => {
+    if (firstRender.current) {
+      firstRender.current = false;
+      return;
+    }
     if (!editor) return;
     const timerId = setTimeout(() => {
       saveMutation.mutate({
@@ -76,6 +80,12 @@ export default function Editor({}: EditorProps) {
   }, [editorContent, editor, noteId]);
   return (
     <section className="p-4 bg-slate-100 text-slate-700 text-lg h-screen overflow-scroll">
+      <section className="w-full flex align-end">
+        <h1 className="text-2xl font-bold">{note?.["title"]}</h1>
+        {saveMutation.isLoading ? (
+          <p className="px-2 text-slate-600">saving...</p>
+        ) : null}
+      </section>
       <EditorContent editor={editor} className="h-screen" />
     </section>
   );

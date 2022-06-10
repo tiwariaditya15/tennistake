@@ -20,9 +20,9 @@ export function useSaveMutation() {
         });
       },
       onSuccess: (docRef) => {
-        toast.success("Saved.", {
-          position: "bottom-right",
-        });
+        // toast.success("Saved.", {
+        //   position: "bottom-right",
+        // });
       },
     }
   );
