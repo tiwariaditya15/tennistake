@@ -1,9 +1,7 @@
 import create from "zustand";
+import { GlobalStore } from "../types";
 
-export const useGlobalStore = create<{
-  email: string | null;
-  setEmail: (email: string) => void;
-}>((set) => ({
+export const useGlobalStore = create<GlobalStore>((set) => ({
   email: null,
   setEmail: (email: string) => set(() => ({ email })),
 }));

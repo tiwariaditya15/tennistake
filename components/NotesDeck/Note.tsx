@@ -1,19 +1,13 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { Note as TNote } from "../../types";
 
-type Note = {
-  name: string;
-  content: string;
-  email: string;
-  id: string;
-};
-
-export default function Note({ note }: { note: Note }) {
+export default function Note({ note }: { note: TNote }) {
   const router = useRouter();
   const { noteId } = router["query"];
   return (
     <Link href={`/note/${note["id"]}`}>
-      <a className={"p-3 hover:bg-slate-600"}>{note["name"]}</a>
+      <a className={"p-3 hover:bg-slate-600"}>{note["title"]}</a>
     </Link>
   );
 }

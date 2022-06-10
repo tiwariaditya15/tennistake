@@ -12,6 +12,7 @@ const Home: NextPage = () => {
   const email = useGlobalStore((state) => state.email);
   const setEmail = useGlobalStore((state) => state.setEmail);
   const router = useRouter();
+
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (!user) {
@@ -22,6 +23,7 @@ const Home: NextPage = () => {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   return (
     <section className="grid grid-cols-6">
       <NotesDeck />

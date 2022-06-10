@@ -11,13 +11,20 @@ import TextAlign from "@tiptap/extension-text-align";
 import TextStyle from "@tiptap/extension-text-style";
 import Link from "@tiptap/extension-link";
 import Placeholder from "@tiptap/extension-placeholder";
+import { useNotesStore } from "../../store";
+import { useRouter } from "next/router";
 
 interface EditorProps {
-  noteId: string;
-  initialContent: string;
+  noteId?: string;
+  initialContent?: string;
 }
 
-export default function Editor({ noteId, initialContent }: EditorProps) {
+export default function Editor({}: EditorProps) {
+  const router = useRouter();
+  const { noteId } = router["query"];
+  const note = useNotesStore((state) =>
+    state.notes.find((note) => note.id === noteId)
+  );
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -42,7 +49,7 @@ export default function Editor({ noteId, initialContent }: EditorProps) {
         openOnClick: false,
       }),
     ],
-    content: initialContent?.length ? initialContent : "",
+    content: note ? note["content"] : "",
     autofocus: false,
     onUpdate: (props) => {},
   });
