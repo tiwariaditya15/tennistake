@@ -1,5 +1,5 @@
 import create from "zustand";
-import { Note, NotesStore } from "../types";
+import { NotesStore } from "../types";
 
 export const useNotesStore = create<NotesStore>((set) => ({
   notes: [],

@@ -13,5 +13,5 @@ export type NotesStore = {
 
 export type GlobalStore = {
   email: string | null;
-  setEmail: (email: string) => void;
+  setEmail: (email: string | null) => void;
 };

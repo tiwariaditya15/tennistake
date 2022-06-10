@@ -3,5 +3,5 @@ import { GlobalStore } from "../types";
 
 export const useGlobalStore = create<GlobalStore>((set) => ({
   email: null,
-  setEmail: (email: string) => set(() => ({ email })),
+  setEmail: (email: string | null) => set(() => ({ email })),
 }));

@@ -7,7 +7,13 @@ export default function Note({ note }: { note: TNote }) {
   const { noteId } = router["query"];
   return (
     <Link href={`/note/${note["id"]}`}>
-      <a className={"p-3 hover:bg-slate-600"}>{note["title"]}</a>
+      <a
+        className={`p-3 hover:bg-slate-600 ${
+          note["id"] === noteId ? "bg-slate-700" : ""
+        }`}
+      >
+        {note["title"]}
+      </a>
     </Link>
   );
 }
