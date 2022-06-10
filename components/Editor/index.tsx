@@ -79,14 +79,16 @@ export default function Editor({}: EditorProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [editorContent, editor, noteId]);
   return (
-    <section className="p-4 bg-slate-100 text-slate-700 text-lg h-screen overflow-scroll">
+    <section className="p-4 bg-slate-200 text-slate-700 text-lg h-screen overflow-scroll">
       <section className="w-full flex align-end">
         <h1 className="text-2xl font-bold">{note?.["title"]}</h1>
         {saveMutation.isLoading ? (
           <p className="px-2 text-slate-600">saving...</p>
         ) : null}
       </section>
-      <EditorContent editor={editor} className="h-screen" />
+      <section className="bg-slate-50 my-2 rounded-md p-2">
+        <EditorContent editor={editor} className="h-screen" />
+      </section>
     </section>
   );
 }
