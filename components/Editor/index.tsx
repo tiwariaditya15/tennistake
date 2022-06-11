@@ -14,7 +14,8 @@ import Placeholder from "@tiptap/extension-placeholder";
 import { useNotesStore } from "../../store";
 import { useRouter } from "next/router";
 import { useSaveMutation } from "../../hooks";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useDeleteMutation } from "../../hooks/useDeleteMutation";
 
 interface EditorProps {
   noteId?: string;
@@ -22,14 +23,15 @@ interface EditorProps {
 }
 
 export default function Editor({}: EditorProps) {
+  const [saved, setSaved] = useState(false);
   const firstRender = useRef(true);
   const router = useRouter();
   const { noteId } = router["query"];
   const note = useNotesStore((state) =>
     state.notes.find((note) => note.id === noteId)
   );
-  const saveMutation = useSaveMutation();
-
+  const saveMutation = useSaveMutation(setSaved);
+  const deleteMutation = useDeleteMutation();
   const editor = useEditor(
     {
       extensions: [
@@ -80,13 +82,26 @@ export default function Editor({}: EditorProps) {
   }, [editorContent, editor, noteId]);
   return (
     <section className="p-4 bg-slate-200 text-slate-700 text-lg h-screen overflow-scroll">
-      <section className="w-full flex align-end">
-        <h1 className="text-2xl font-bold">{note?.["title"]}</h1>
-        {saveMutation.isLoading ? (
-          <p className="px-2 text-slate-600">saving...</p>
-        ) : null}
+      <section className="w-full flex justify-between">
+        <section className="flex items-end">
+          <h1 className="text-2xl font-bold">{note?.["title"]}</h1>
+          {saved ? (
+            <p className="px-2 text-sm mb-1 text-slate-600">saved</p>
+          ) : null}
+        </section>
+        <button
+          className="bg-red-600 text-white px-2 rounded-md"
+          onClick={() => {
+            if (deleteMutation.isLoading) {
+              return;
+            }
+            deleteMutation.mutate(noteId as string);
+          }}
+        >
+          {deleteMutation.isLoading ? "Deleting" : "Delete"}
+        </button>
       </section>
-      <section className="bg-slate-50 my-2 rounded-md p-2">
+      <section className="bg-slate-50 overflow-scroll my-2 rounded-md p-2">
         <EditorContent editor={editor} className="h-screen" />
       </section>
     </section>
