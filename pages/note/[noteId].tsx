@@ -9,11 +9,9 @@ import Editor from "../../components/Editor";
 import { useWindowSize } from "../../hooks";
 
 const Note: NextPage = () => {
-  const email = useGlobalStore((state) => state.email);
   const setEmail = useGlobalStore((state) => state.setEmail);
   const router = useRouter();
   const { noteId } = router["query"];
-  const width = useWindowSize();
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (!user) {

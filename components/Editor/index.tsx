@@ -67,7 +67,7 @@ export default function Editor({}: EditorProps) {
       autofocus: false,
       onUpdate: (props) => {},
     },
-    [note]
+    [note?.content]
   );
   // debounced save calls
   const editorContent = editor?.getHTML();

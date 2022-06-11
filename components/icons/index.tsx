@@ -35,3 +35,21 @@ export function RiHome2Line(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
+
+export function MaterialSymbolsMenu(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      xmlnsXlink="http://www.w3.org/1999/xlink"
+      width="1rem"
+      height="1rem"
+      viewBox="0 0 24 24"
+      {...props}
+    >
+      <path
+        fill="currentColor"
+        d="M3 18v-2h18v2Zm0-5v-2h18v2Zm0-5V6h18v2Z"
+      ></path>
+    </svg>
+  );
+}
