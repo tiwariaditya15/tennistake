@@ -6,12 +6,14 @@ import { useRouter } from "next/router";
 import { useGlobalStore } from "../../store";
 import { NotesDeck } from "../../components/NotesDeck";
 import Editor from "../../components/Editor";
+import { useWindowSize } from "../../hooks";
 
 const Note: NextPage = () => {
   const email = useGlobalStore((state) => state.email);
   const setEmail = useGlobalStore((state) => state.setEmail);
   const router = useRouter();
   const { noteId } = router["query"];
+  const width = useWindowSize();
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (!user) {
@@ -25,7 +27,7 @@ const Note: NextPage = () => {
   return (
     <section className="grid grid-cols-6">
       <NotesDeck />
-      <section className="col-span-5">
+      <section className="col-span-6 md:col-span-5">
         <Editor noteId={noteId as string} initialContent={"Hello there!"} />
       </section>
     </section>

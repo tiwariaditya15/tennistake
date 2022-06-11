@@ -17,7 +17,7 @@ export function NotesDeck() {
 
   const notesList = notes?.map((note) => <Note note={note} key={note["id"]} />);
   return (
-    <section className="flex flex-col justify-between bg-slate-900 text-white h-screen">
+    <section className="flex flex-col justify-between bg-slate-900 text-white h-screen hidden md:flex">
       <section className="flex flex-col">
         <section className="flex justify-end p-4 cursor-pointer w-full">
           <span onClick={() => setCreateTitle((cur) => !cur)}>

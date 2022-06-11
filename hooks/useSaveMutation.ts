@@ -3,8 +3,9 @@ import { toast } from "react-toastify";
 import { Note } from "../types";
 import { doc, updateDoc } from "firebase/firestore/lite";
 import { db } from "../firebase";
+import { Dispatch, SetStateAction } from "react";
 
-export function useSaveMutation() {
+export function useSaveMutation(setSaved: Dispatch<SetStateAction<boolean>>) {
   return useMutation(
     async ({ id, content }: { id: string; content: string }) => {
       const noteRef = doc(db, "notes", id);
@@ -20,9 +21,8 @@ export function useSaveMutation() {
         });
       },
       onSuccess: (docRef) => {
-        // toast.success("Saved.", {
-        //   position: "bottom-right",
-        // });
+        setSaved(true);
+        setTimeout(() => setSaved(false), 2000);
       },
     }
   );
