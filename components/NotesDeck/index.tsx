@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useNotes } from "../../hooks/useNotes";
 import { useGlobalStore } from "../../store";
 import { CreateTitle } from "../CreateTitle";
-import { IonCreateOutline } from "../icons";
+import { IonCreateOutline, RiHome2Line } from "../icons";
 import { auth } from "../../firebase";
 import { signOut } from "firebase/auth";
 import { toast } from "react-toastify";
@@ -19,7 +19,10 @@ export function NotesDeck() {
   return (
     <section className="flex flex-col justify-between bg-slate-900 text-white h-screen hidden md:flex">
       <section className="flex flex-col">
-        <section className="flex justify-end p-4 cursor-pointer w-full">
+        <section className="flex justify-between p-4 cursor-pointer w-full">
+          <span onClick={() => router.push("/")}>
+            <RiHome2Line width={"1.5rem"} height={"1.5rem"} />
+          </span>
           <span onClick={() => setCreateTitle((cur) => !cur)}>
             <IonCreateOutline width={"1.5rem"} height={"1.5rem"} />
           </span>

@@ -76,7 +76,7 @@ export default function Editor({}: EditorProps) {
       firstRender.current = false;
       return;
     }
-    if (!editor) return;
+    if (!editor || editor.getHTML() === "") return;
     const timerId = setTimeout(() => {
       saveMutation.mutate({
         id: noteId as string,
