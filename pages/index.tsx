@@ -28,6 +28,9 @@ const Home: NextPage = () => {
     <section className="grid grid-cols-6">
       <NotesDeck />
       <section className="flex w-3/4 mx-auto justify-center col-span-5 h-screen">
+        <h1>h1</h1>
+        <h2>h2</h2>
+        <h3>h3</h3>
         <Image src={tennis} alt={"Tennis Illustration"} />
       </section>
     </section>
